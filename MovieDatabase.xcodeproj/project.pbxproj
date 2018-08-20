@@ -19,6 +19,7 @@
 		BCCA057B211D96B700CF9B19 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCA057A211D96B700CF9B19 /* Endpoint.swift */; };
 		BCCA057D211D983900CF9B19 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCA057C211D983900CF9B19 /* APIClient.swift */; };
 		BCCA057F211D993500CF9B19 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCA057E211D993500CF9B19 /* Result.swift */; };
+		BCCA0581211D9FA500CF9B19 /* MovieClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCA0580211D9FA500CF9B19 /* MovieClient.swift */; };
 		BCCA0584211DA06100CF9B19 /* MovieFeedResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCA0583211DA06100CF9B19 /* MovieFeedResult.swift */; };
 		BCD1D3B02126BF06001E180D /* CreditsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD1D3AF2126BF06001E180D /* CreditsResult.swift */; };
 		BCD1D3B42126C973001E180D /* CollectionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD1D3B32126C973001E180D /* CollectionResult.swift */; };
@@ -60,6 +61,7 @@
 		BCCA057A211D96B700CF9B19 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		BCCA057C211D983900CF9B19 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		BCCA057E211D993500CF9B19 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		BCCA0580211D9FA500CF9B19 /* MovieClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieClient.swift; sourceTree = "<group>"; };
 		BCCA0583211DA06100CF9B19 /* MovieFeedResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieFeedResult.swift; sourceTree = "<group>"; };
 		BCD1D3AF2126BF06001E180D /* CreditsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsResult.swift; sourceTree = "<group>"; };
 		BCD1D3B32126C973001E180D /* CollectionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionResult.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				BCCA054E211D95DD00CF9B19 /* ViewController.swift in Sources */,
 				BCCA057B211D96B700CF9B19 /* Endpoint.swift in Sources */,
 				BCD1D3B02126BF06001E180D /* CreditsResult.swift in Sources */,
+				BCCA0581211D9FA500CF9B19 /* MovieClient.swift in Sources */,
 				BCCA057F211D993500CF9B19 /* Result.swift in Sources */,
 				BCCA0584211DA06100CF9B19 /* MovieFeedResult.swift in Sources */,
 				BCCA054C211D95DD00CF9B19 /* AppDelegate.swift in Sources */,
