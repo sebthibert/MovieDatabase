@@ -7,14 +7,18 @@ protocol Endpoint {
 
 extension Endpoint {
 
-  var apiKey: String {
-    return "api_key=f7caebd7ef3ee2bd2ca8ecfc1cb67a2c"
+  var region: URLQueryItem {
+    return URLQueryItem(name: "region", value: "GB")
+  }
+
+  var apiKey: URLQueryItem {
+    return URLQueryItem(name: "api_key", value: "f7caebd7ef3ee2bd2ca8ecfc1cb67a2c")
   }
 
   var urlComponents: URLComponents {
     var components = URLComponents(string: baseURL)!
     components.path = path
-    components.query = apiKey
+    components.queryItems = [apiKey, region]
     return components
   }
 
