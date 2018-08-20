@@ -6,8 +6,28 @@
 	<dict>
 		<key>MovieDatabase.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>BCCA0547211D95DD00CF9B19</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BCCA055B211D95DE00CF9B19</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BCCA0566211D95DE00CF9B19</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
