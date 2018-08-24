@@ -12,7 +12,7 @@ class ExpandAnimationController: NSObject, UIViewControllerAnimatedTransitioning
   }
 
   func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-    guard let collectionViewController = transitionContext.viewController(forKey: .from) as? NowPlayingCollectionViewController else {
+    guard let collectionViewController = transitionContext.viewController(forKey: .from) as? NowPlayingViewController else {
       return
     }
     guard let viewController = transitionContext.viewController(forKey: .to) as? MovieViewController else {

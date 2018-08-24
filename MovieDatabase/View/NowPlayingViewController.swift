@@ -1,6 +1,7 @@
 import UIKit
 
-class NowPlayingCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate {
+class NowPlayingViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate {
+  @IBOutlet weak var collectionView: UICollectionView!
   let movieClient = MovieClient()
   let imageClient = ImageClient()
   var movies: [Movie] = []
@@ -14,6 +15,7 @@ class NowPlayingCollectionViewController: UICollectionViewController, UICollecti
   override func viewDidLoad() {
     super.viewDidLoad()
     getMovies()
+    setupFloatingAction()
   }
 
   func getMovies() {
@@ -21,6 +23,45 @@ class NowPlayingCollectionViewController: UICollectionViewController, UICollecti
       self?.movies = movies
       self?.collectionView?.reloadData()
     }
+  }
+
+  func setupFloatingAction() {
+    let sortByFloatingAction = FloatingActionView()
+    sortByFloatingAction.buttonText = "Sort"
+    sortByFloatingAction.addItem("Rating", icon: #imageLiteral(resourceName: "star"), handler: sortByRating)
+    sortByFloatingAction.addItem("Title", icon: #imageLiteral(resourceName: "abc"), handler: sortByTitle)
+    sortByFloatingAction.addItem("Release date", icon: #imageLiteral(resourceName: "calendar"), handler: sortByReleaseDate)
+    view.addSubview(sortByFloatingAction)
+  }
+
+  func sortByRating() {
+    movies.sort { lhs, rhs -> Bool in
+      guard let lhsVoteAverage = lhs.voteAverage, let rhsVoteAverage = rhs.voteAverage else {
+        return false
+      }
+      return lhsVoteAverage > rhsVoteAverage
+    }
+    collectionView.reloadData()
+  }
+
+  func sortByTitle() {
+    movies.sort { lhs, rhs -> Bool in
+      guard let lhsTitle = lhs.title, let rhsTitle = rhs.title else {
+        return false
+      }
+      return lhsTitle < rhsTitle
+    }
+    collectionView.reloadData()
+  }
+
+  func sortByReleaseDate() {
+    movies.sort { lhs, rhs -> Bool in
+      guard let lhsDate = lhs.releaseDate, let rhsDate = rhs.releaseDate else {
+        return false
+      }
+      return lhsDate > rhsDate
+    }
+    collectionView.reloadData()
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -36,21 +77,25 @@ class NowPlayingCollectionViewController: UICollectionViewController, UICollecti
     viewController.transitioningDelegate = self
   }
 
-  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  // MARK: UICollectionViewDatasource
+
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return movies.count
   }
 
-  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
     cell.setupCell(movie: movies[indexPath.row], imageClient: imageClient)
     return cell
   }
 
-  override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+  func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
     return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "NowPlayingHeader", for: indexPath)
   }
 
-  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+  // MARK: UICollectionViewDelegate
+
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     collectionView.allowsSelection = false
     movieSelectedIndex = indexPath
     movieClient.getMovie(from: .movie(movies[indexPath.row].id)) { [weak self] movie in
@@ -62,7 +107,7 @@ class NowPlayingCollectionViewController: UICollectionViewController, UICollecti
   // MARK: UICollectionViewDelegateFlowLayout
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let width = (collectionView.frame.width - (10 * 3)) / 2
+    let width = (collectionView.frame.width - 30) / 2
     return CGSize(width: width, height: width * 1.5)
   }
 
