@@ -12,6 +12,8 @@
 		BC177B3A211DC64100F952EB /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC177B39211DC64100F952EB /* MovieViewController.swift */; };
 		BC177B3C211DC90A00F952EB /* MovieDetailsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC177B3B211DC90A00F952EB /* MovieDetailsResult.swift */; };
 		BC177B42211DE5C200F952EB /* TailerResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC177B41211DE5C200F952EB /* TailerResult.swift */; };
+		BC7D6ACA21301EF600F8AE82 /* FloatingActionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7D6AC821301EF600F8AE82 /* FloatingActionItem.swift */; };
+		BC7D6ACB21301EF600F8AE82 /* FloatingActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7D6AC921301EF600F8AE82 /* FloatingActionView.swift */; };
 		BCCA054C211D95DD00CF9B19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCA054B211D95DD00CF9B19 /* AppDelegate.swift */; };
 		BCCA054E211D95DD00CF9B19 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCA054D211D95DD00CF9B19 /* NowPlayingViewController.swift */; };
 		BCCA0551211D95DD00CF9B19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCCA054F211D95DD00CF9B19 /* Main.storyboard */; };
@@ -53,6 +55,8 @@
 		BC177B39211DC64100F952EB /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
 		BC177B3B211DC90A00F952EB /* MovieDetailsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsResult.swift; sourceTree = "<group>"; };
 		BC177B41211DE5C200F952EB /* TailerResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TailerResult.swift; sourceTree = "<group>"; };
+		BC7D6AC821301EF600F8AE82 /* FloatingActionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingActionItem.swift; sourceTree = "<group>"; };
+		BC7D6AC921301EF600F8AE82 /* FloatingActionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingActionView.swift; sourceTree = "<group>"; };
 		BCCA0548211D95DD00CF9B19 /* MovieDatabase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDatabase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCA054B211D95DD00CF9B19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCCA054D211D95DD00CF9B19 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
@@ -113,11 +117,13 @@
 		BC177B40211DDF2B00F952EB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BC016FB8212B319100A53379 /* ViewTransition */,
+				BCD1D3B12126C29A001E180D /* ActorCollectionViewCell.swift */,
+				BC7D6AC821301EF600F8AE82 /* FloatingActionItem.swift */,
+				BC7D6AC921301EF600F8AE82 /* FloatingActionView.swift */,
 				BCCA0587211DA3C200CF9B19 /* MovieCollectionViewCell.swift */,
 				BC177B39211DC64100F952EB /* MovieViewController.swift */,
-				BCD1D3B12126C29A001E180D /* ActorCollectionViewCell.swift */,
 				BCCA054D211D95DD00CF9B19 /* NowPlayingViewController.swift */,
+				BC016FB8212B319100A53379 /* ViewTransition */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -338,7 +344,9 @@
 				BCCA057F211D993500CF9B19 /* Result.swift in Sources */,
 				BC177B3A211DC64100F952EB /* MovieViewController.swift in Sources */,
 				BCCA0584211DA06100CF9B19 /* MovieFeedResult.swift in Sources */,
+				BC7D6ACA21301EF600F8AE82 /* FloatingActionItem.swift in Sources */,
 				BCCA054E211D95DD00CF9B19 /* NowPlayingViewController.swift in Sources */,
+				BC7D6ACB21301EF600F8AE82 /* FloatingActionView.swift in Sources */,
 				BCCA054C211D95DD00CF9B19 /* AppDelegate.swift in Sources */,
 				BC177B42211DE5C200F952EB /* TailerResult.swift in Sources */,
 				BC177B38211DC1C800F952EB /* ImageClient.swift in Sources */,
