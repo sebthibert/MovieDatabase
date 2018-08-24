@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC016FBA212B321500A53379 /* ExpandAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC016FB9212B321500A53379 /* ExpandAnimationController.swift */; };
 		BC177B38211DC1C800F952EB /* ImageClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC177B37211DC1C800F952EB /* ImageClient.swift */; };
 		BC177B3A211DC64100F952EB /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC177B39211DC64100F952EB /* MovieViewController.swift */; };
 		BC177B3C211DC90A00F952EB /* MovieDetailsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC177B3B211DC90A00F952EB /* MovieDetailsResult.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BC016FB9212B321500A53379 /* ExpandAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandAnimationController.swift; sourceTree = "<group>"; };
 		BC177B37211DC1C800F952EB /* ImageClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageClient.swift; sourceTree = "<group>"; };
 		BC177B39211DC64100F952EB /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
 		BC177B3B211DC90A00F952EB /* MovieDetailsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsResult.swift; sourceTree = "<group>"; };
@@ -100,9 +102,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BC016FB8212B319100A53379 /* ViewTransition */ = {
+			isa = PBXGroup;
+			children = (
+				BC016FB9212B321500A53379 /* ExpandAnimationController.swift */,
+			);
+			path = ViewTransition;
+			sourceTree = "<group>";
+		};
 		BC177B40211DDF2B00F952EB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BC016FB8212B319100A53379 /* ViewTransition */,
 				BCCA0587211DA3C200CF9B19 /* MovieCollectionViewCell.swift */,
 				BCCA054D211D95DD00CF9B19 /* NowPlayingCollectionViewController.swift */,
 				BC177B39211DC64100F952EB /* MovieViewController.swift */,
@@ -333,6 +344,7 @@
 				BC177B38211DC1C800F952EB /* ImageClient.swift in Sources */,
 				BCD1D3B42126C973001E180D /* CollectionResult.swift in Sources */,
 				BCCA057D211D983900CF9B19 /* APIClient.swift in Sources */,
+				BC016FBA212B321500A53379 /* ExpandAnimationController.swift in Sources */,
 				BC177B3C211DC90A00F952EB /* MovieDetailsResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

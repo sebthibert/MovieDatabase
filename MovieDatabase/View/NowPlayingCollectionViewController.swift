@@ -1,26 +1,15 @@
 import UIKit
 
-class NowPlayingCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
-  @IBAction func singleButtonPressed(_ sender: Any) {
-    guard marginCount != 2 else {
-      return
-    }
-    (marginCount, columnCount) = (2, 1)
-    collectionView?.reloadData()
-  }
-  @IBAction func dualButtonPressed(_ sender: Any) {
-    guard marginCount != 3 else {
-      return
-    }
-    (marginCount, columnCount) = (3, 2)
-    collectionView?.reloadData()
-  }
-
+class NowPlayingCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate {
   let movieClient = MovieClient()
   let imageClient = ImageClient()
   var movies: [Movie] = []
-  var (marginCount, columnCount): (CGFloat, CGFloat) = (3, 2)
+  var movieSelectedIndex = IndexPath(item: 0, section: 0)
+
+  var movieSelectedFrame: CGRect {
+    let cellFrame = collectionView?.layoutAttributesForItem(at: movieSelectedIndex)?.frame ?? .zero
+    return collectionView?.convert(cellFrame, to: collectionView?.superview) ?? .zero
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -44,8 +33,8 @@ class NowPlayingCollectionViewController: UICollectionViewController, UICollecti
     viewController.movie = movie
     viewController.movieClient = movieClient
     viewController.imageClient = imageClient
+    viewController.transitioningDelegate = self
   }
-
 
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return movies.count
@@ -62,16 +51,25 @@ class NowPlayingCollectionViewController: UICollectionViewController, UICollecti
   }
 
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    collectionView.allowsSelection = false
+    movieSelectedIndex = indexPath
     movieClient.getMovie(from: .movie(movies[indexPath.row].id)) { [weak self] movie in
       self?.performSegue(withIdentifier: "ShowMovie", sender: movie)
+      collectionView.allowsSelection = true
     }
   }
 
   // MARK: UICollectionViewDelegateFlowLayout
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let width = (collectionView.frame.width - (10 * marginCount)) / columnCount
+    let width = (collectionView.frame.width - (10 * 3)) / 2
     return CGSize(width: width, height: width * 1.5)
+  }
+
+  // MARK: UIViewControllerTransitioningDelegate
+
+  func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    return ExpandAnimationController(originFrame: movieSelectedFrame)
   }
 }
 
