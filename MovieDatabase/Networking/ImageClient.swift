@@ -19,17 +19,34 @@ extension ImageSize: Endpoint {
 
 class ImageClient: APIClient {
   let session: URLSession
+  let cache = NSCache<NSString, UIImage>()
 
   init(configuration: URLSessionConfiguration) {
     self.session = URLSession(configuration: configuration)
+    cache.countLimit = 100
   }
 
   convenience init() {
     self.init(configuration: .default)
   }
 
-  func getImage(for imageSize: ImageSize, completion: @escaping (UIImage) -> Void) {
+  func getImage(for posterPath: String?, completion: @escaping (UIImage) -> Void) {
+    guard let posterPath = posterPath else {
+      completion(#imageLiteral(resourceName: "cast-placeholder"))
+      return
+    }
+    guard let cachedImage = cache.object(forKey: NSString(string: posterPath)) else {
+      downloadImage(for: .medium(posterPath)) { [weak self] image in
+        self?.cache.setObject(image, forKey: NSString(string: posterPath))
+        completion(image)
+      }
+      return
+    }
+    completion(cachedImage)
+  }
+
+  func downloadImage(for imageSize: ImageSize, completion: @escaping (UIImage) -> Void) {
     let request = imageSize.request
-    downloadImage(with: request, completion: completion)
+    fetchImage(with: request, completion: completion)
   }
 }

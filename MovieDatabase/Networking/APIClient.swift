@@ -69,15 +69,17 @@ extension APIClient {
     task.resume()
   }
 
-  func downloadImage(with request: URLRequest, completion: @escaping (UIImage) -> Void) {
+  func fetchImage(with request: URLRequest, completion: @escaping (UIImage) -> Void) {
     let task = session.dataTask(with: request) { data, response, error in
-      guard let data = data else {
-        return
+      DispatchQueue.main.async {
+        guard let data = data else {
+          return
+        }
+        guard let image = UIImage(data: data) else {
+          return
+        }
+        completion(image)
       }
-      guard let image = UIImage(data: data) else {
-        return
-      }
-      completion(image)
     }
     task.resume()
   }

@@ -81,24 +81,18 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UIColle
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard collectionView == castCollectionView else {
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
-      let movie = collectionMovies[indexPath.row]
-      imageClient.getImage(for: .medium(movie.posterPath)) { image in
-        DispatchQueue.main.async {
-          cell.poster.image = image
-        }
-      }
-      return cell
-    }
+    return collectionView == collectionCollectionView ? movieCellForItemAt(indexPath, forCollectionView: collectionCollectionView) : actorCellForItemAt(indexPath, forCollectionView: castCollectionView)
+  }
+
+  func movieCellForItemAt(_ indexPath: IndexPath, forCollectionView collectionView: UICollectionView) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
+    cell.setupCell(movie: collectionMovies[indexPath.row], imageClient: imageClient)
+    return cell
+  }
+
+  func actorCellForItemAt(_ indexPath: IndexPath, forCollectionView collectionView: UICollectionView) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActorCell", for: indexPath) as! ActorCollectionViewCell
-    let actor = cast[indexPath.row]
-    imageClient.getImage(for: .medium(actor.posterPath)) { image in
-      DispatchQueue.main.async {
-        cell.poster.image = image
-      }
-    }
-    cell.name.text = actor.name
+    cell.setupCell(actor: cast[indexPath.row], imageClient: imageClient)
     return cell
   }
 }

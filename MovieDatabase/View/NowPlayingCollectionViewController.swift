@@ -53,12 +53,7 @@ class NowPlayingCollectionViewController: UICollectionViewController, UICollecti
 
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
-    let movie = movies[indexPath.row]
-    imageClient.getImage(for: .medium(movie.posterPath)) { image in
-      DispatchQueue.main.async {
-        cell.poster.image = image
-      }
-    }
+    cell.setupCell(movie: movies[indexPath.row], imageClient: imageClient)
     return cell
   }
 
