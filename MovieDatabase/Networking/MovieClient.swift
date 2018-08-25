@@ -104,7 +104,7 @@ class MovieClient: APIClient {
     }, completion: completion)
   }
 
-  func getCast(from movieFeedType: MovieFeed, completion: @escaping ([Actor]?) -> Void) {
+  func getCast(from movieFeedType: MovieFeed, completion: @escaping ([ActorOverview]?) -> Void) {
     getCreditsResult(from: movieFeedType) { result in
       switch result {
       case .success(let creditsResult):
