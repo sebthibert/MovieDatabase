@@ -31,6 +31,7 @@
 		BCD1D3B22126C29A001E180D /* ActorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD1D3B12126C29A001E180D /* ActorCollectionViewCell.swift */; };
 		BCD1D3B42126C973001E180D /* CollectionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD1D3B32126C973001E180D /* CollectionResult.swift */; };
 		BCE31DB521306DEB0065E7E4 /* MovieSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE31DB421306DEB0065E7E4 /* MovieSorter.swift */; };
+		BCE31DB7213071420065E7E4 /* FloatingActionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE31DB6213071420065E7E4 /* FloatingActionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		BCD1D3B12126C29A001E180D /* ActorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorCollectionViewCell.swift; sourceTree = "<group>"; };
 		BCD1D3B32126C973001E180D /* CollectionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionResult.swift; sourceTree = "<group>"; };
 		BCE31DB421306DEB0065E7E4 /* MovieSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSorter.swift; sourceTree = "<group>"; };
+		BCE31DB6213071420065E7E4 /* FloatingActionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				BCCA0583211DA06100CF9B19 /* MovieFeedResult.swift */,
+				BCE31DB6213071420065E7E4 /* FloatingActionManager.swift */,
 				BC177B3B211DC90A00F952EB /* MovieDetailsResult.swift */,
 				BCE31DB421306DEB0065E7E4 /* MovieSorter.swift */,
 				BC177B41211DE5C200F952EB /* TailerResult.swift */,
@@ -342,6 +345,7 @@
 				BCCA057B211D96B700CF9B19 /* Endpoint.swift in Sources */,
 				BCD1D3B22126C29A001E180D /* ActorCollectionViewCell.swift in Sources */,
 				BCD1D3B02126BF06001E180D /* CreditsResult.swift in Sources */,
+				BCE31DB7213071420065E7E4 /* FloatingActionManager.swift in Sources */,
 				BCCA0581211D9FA500CF9B19 /* MovieClient.swift in Sources */,
 				BCCA0588211DA3C200CF9B19 /* MovieCollectionViewCell.swift in Sources */,
 				BCCA057F211D993500CF9B19 /* Result.swift in Sources */,
