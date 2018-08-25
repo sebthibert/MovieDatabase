@@ -1,18 +1,23 @@
 import UIKit
 
+enum Alignment {
+  case left, right
+}
+
 class FloatingActionView: UIView {
   let size: CGFloat = 56
   let padding: CGFloat = 20
   let circleLayer: CAShapeLayer = CAShapeLayer()
   let overlayView : UIControl = UIControl()
-
+  var alignment: Alignment = .right
   var items: [FloatingActionItem] = []
   var buttonImage = UIImage()
   var buttonText = ""
   var overlayClosed = true
 
-  init() {
+  init(alignment: Alignment) {
     super.init(frame: CGRect(x: 0, y: 0, width: size, height: size))
+    self.alignment = alignment
     backgroundColor = .clear
   }
 
@@ -23,7 +28,7 @@ class FloatingActionView: UIView {
   override func draw(_ rect: CGRect) {
     super.draw(rect)
     setupTapGestures()
-    setRightBottomFrame()
+    setFrame(alignment: alignment)
     setCircleLayer()
     setShadow()
     buttonText != "" ? setButtonText() : setButtonImage()
@@ -59,8 +64,9 @@ class FloatingActionView: UIView {
     overlayClosed = true
   }
 
-  func addItem(_ title: String, icon: UIImage?, handler: @escaping (() -> Void)) {
+  func addItem(_ title: String, icon: UIImage?, handler: (() -> Void)?) {
     let item = FloatingActionItem()
+    item.alignment = alignment
     item.title = title
     item.icon = icon
     item.handler = handler
@@ -87,10 +93,17 @@ class FloatingActionView: UIView {
   }
 
   private func determineTapArea(item : FloatingActionItem) -> CGRect {
-    let tappableMargin : CGFloat = 30.0
-    let x = item.titleLabel.frame.origin.x + item.bounds.origin.x
-    let y = item.bounds.origin.y
-    let width = item.titleLabel.bounds.size.width + item.bounds.size.width + tappableMargin
+    var x: CGFloat = 0
+    var y: CGFloat = 0
+    switch alignment {
+    case .right:
+      x = item.titleLabel.frame.origin.x + item.bounds.origin.x
+      y = item.bounds.origin.y
+    case .left:
+      x = item.bounds.origin.x
+      y = item.bounds.origin.y
+    }
+    let width = item.titleLabel.bounds.size.width + item.bounds.size.width + 30
     let height = item.bounds.size.height
     return CGRect(x: x, y: y, width: width, height: height)
   }
@@ -106,7 +119,7 @@ class FloatingActionView: UIView {
   private func setButtonText() {
     let buttonLabel = UILabel(frame: CGRect(x: 0, y: 0, width: size, height: size))
     buttonLabel.textColor = .white
-    buttonLabel.font = .systemFont(ofSize: 15)
+    buttonLabel.font = .systemFont(ofSize: 16)
     buttonLabel.textAlignment = .center
     buttonLabel.removeFromSuperview()
     buttonLabel.center = CGPoint(x: size/2, y: size/2)
@@ -142,8 +155,13 @@ class FloatingActionView: UIView {
     circleLayer.shadowOpacity = 0.4
   }
 
-  private func setRightBottomFrame() {
-    frame = CGRect(x: (superview!.bounds.size.width-size) - padding, y: (superview!.bounds.size.height-size) - padding, width: size + padding, height: size + padding)
+  private func setFrame(alignment: Alignment) {
+    switch alignment {
+    case .left:
+      frame = CGRect(x: 0 + padding, y: (superview!.bounds.size.height-size) - padding, width: size + padding, height: size + padding)
+    case .right:
+      frame = CGRect(x: (superview!.bounds.size.width-size) - padding, y: (superview!.bounds.size.height-size) - padding, width: size + padding, height: size + padding)
+    }
   }
 
   private func popAnimationWithOpen() {

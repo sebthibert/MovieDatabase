@@ -5,7 +5,7 @@ class FloatingActionItem: UIView {
   let size: CGFloat = 42
   let circleLayer: CAShapeLayer = CAShapeLayer()
   let titleLabel = UILabel()
-
+  var alignment: Alignment = .right
   var handler: (() -> Void)? = nil
   var title: String? = nil
   var icon: UIImage? = nil
@@ -25,7 +25,7 @@ class FloatingActionItem: UIView {
     layer.shouldRasterize = true
     layer.rasterizationScale = UIScreen.main.scale
     createCircleLayer()
-    setupTitleLabel()
+    setupTitleLabel(alignment: alignment)
     setupIconImageView()
     setupShadow()
     setupTapGestures()
@@ -49,12 +49,18 @@ class FloatingActionItem: UIView {
     layer.addSublayer(circleLayer)
   }
 
-  func setupTitleLabel() {
+  func setupTitleLabel(alignment: Alignment) {
     titleLabel.text = title
     titleLabel.textColor = .white
     titleLabel.sizeToFit()
-    titleLabel.frame.origin.x = -titleLabel.frame.size.width - 10
-    titleLabel.frame.origin.y = size/2-titleLabel.frame.size.height/2
+    switch alignment {
+    case .right:
+      titleLabel.frame.origin.x = -titleLabel.frame.size.width - 10
+      titleLabel.frame.origin.y = size/2-titleLabel.frame.size.height/2
+    case .left:
+      titleLabel.frame.origin.x = frame.size.width + 10
+      titleLabel.frame.origin.y = size/2-titleLabel.frame.size.height/2
+    }
     titleLabel.transform = CGAffineTransform(scaleX: 1.0, y: 1.0);
     addSubview(titleLabel)
     bringSubview(toFront: titleLabel)

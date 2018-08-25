@@ -1,11 +1,12 @@
 import UIKit
 
-class NowPlayingViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate {
+class NowPlayingViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, FloatingActionManagerDelegate {
   @IBOutlet weak var collectionView: UICollectionView!
   let movieClient = MovieClient()
   let imageClient = ImageClient()
   var movies: [Movie] = []
   var movieSelectedIndex = IndexPath(item: 0, section: 0)
+  var columnCount: CGFloat = 2
 
   var movieSelectedFrame: CGRect {
     let cellFrame = collectionView?.layoutAttributesForItem(at: movieSelectedIndex)?.frame ?? .zero
@@ -15,53 +16,19 @@ class NowPlayingViewController: UIViewController, UICollectionViewDelegate, UICo
   override func viewDidLoad() {
     super.viewDidLoad()
     getMovies()
-    setupFloatingAction()
   }
 
   func getMovies() {
     movieClient.getMovies(for: .nowPlaying) { [weak self] movies in
       self?.movies = movies
+      self?.setupFloatingActions(withMovies: movies)
       self?.collectionView?.reloadData()
     }
   }
 
-  func setupFloatingAction() {
-    let sortByFloatingAction = FloatingActionView()
-    sortByFloatingAction.buttonText = "Sort"
-    sortByFloatingAction.addItem("Rating", icon: #imageLiteral(resourceName: "star"), handler: sortByRating)
-    sortByFloatingAction.addItem("Title", icon: #imageLiteral(resourceName: "abc"), handler: sortByTitle)
-    sortByFloatingAction.addItem("Release date", icon: #imageLiteral(resourceName: "calendar"), handler: sortByReleaseDate)
-    view.addSubview(sortByFloatingAction)
-  }
-
-  func sortByRating() {
-    movies.sort { lhs, rhs -> Bool in
-      guard let lhsVoteAverage = lhs.voteAverage, let rhsVoteAverage = rhs.voteAverage else {
-        return false
-      }
-      return lhsVoteAverage > rhsVoteAverage
-    }
-    collectionView.reloadData()
-  }
-
-  func sortByTitle() {
-    movies.sort { lhs, rhs -> Bool in
-      guard let lhsTitle = lhs.title, let rhsTitle = rhs.title else {
-        return false
-      }
-      return lhsTitle < rhsTitle
-    }
-    collectionView.reloadData()
-  }
-
-  func sortByReleaseDate() {
-    movies.sort { lhs, rhs -> Bool in
-      guard let lhsDate = lhs.releaseDate, let rhsDate = rhs.releaseDate else {
-        return false
-      }
-      return lhsDate > rhsDate
-    }
-    collectionView.reloadData()
+  func setupFloatingActions(withMovies movies: [MovieOverview]) {
+    let floatingActionManager = FloatingActionManager(movies: movies, delegate: self)
+    floatingActionManager.floatingActions.forEach { view.addSubview($0) }
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -107,7 +74,7 @@ class NowPlayingViewController: UIViewController, UICollectionViewDelegate, UICo
   // MARK: UICollectionViewDelegateFlowLayout
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let width = (collectionView.frame.width - 30) / 2
+    let width = (collectionView.frame.width - (10 * (columnCount + 1))) / columnCount
     return CGSize(width: width, height: width * 1.5)
   }
 
@@ -115,6 +82,18 @@ class NowPlayingViewController: UIViewController, UICollectionViewDelegate, UICo
 
   func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
     return ExpandAnimationController(originFrame: movieSelectedFrame)
+  }
+
+  // MARK: FloatingActionManagerDelegate
+
+  func updateColumnCount(to columnCount: CGFloat) {
+    self.columnCount = columnCount
+    collectionView.reloadData()
+  }
+
+  func updateMovies(to sortedMovies: [MovieOverview]) {
+    movies = sortedMovies
+    collectionView.reloadData()
   }
 }
 
