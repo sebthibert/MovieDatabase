@@ -2,10 +2,10 @@ import Foundation
 import UIKit
 
 struct MovieFeedResult: Decodable {
-  let results: [Movie]?
+  let results: [MovieOverview]?
 }
 
-struct Movie: Decodable {
+struct MovieOverview: Decodable {
   let id: Int?
   let title: String?
   let posterPath: String?

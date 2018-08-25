@@ -35,7 +35,7 @@ class MovieClient: APIClient {
     self.init(configuration: .default)
   }
 
-  func getMovies(for movieFeedType: MovieFeed, completion: @escaping ([Movie]) -> Void) {
+  func getMovies(for movieFeedType: MovieFeed, completion: @escaping ([MovieOverview]) -> Void) {
     getMovieFeedResult(for: movieFeedType) { result in
       switch result {
       case .success(let movieFeedResult):
@@ -125,7 +125,6 @@ class MovieClient: APIClient {
     }, completion: completion)
   }
 
-  func getCollectionMovies(for movieFeedType: MovieFeed, completion: @escaping ([Movie]) -> Void) {
   func getActor(from movieFeedType: MovieFeed, completion: @escaping (ActorDetailsResult) -> Void) {
     getActorDetailsResult(from: movieFeedType) { result in
       switch result {
@@ -150,6 +149,7 @@ class MovieClient: APIClient {
     }, completion: completion)
   }
 
+  func getCollectionMovies(for movieFeedType: MovieFeed, completion: @escaping ([MovieOverview]) -> Void) {
     getCollectionResult(from: movieFeedType) { result in
       switch result {
       case .success(let collectionResult):

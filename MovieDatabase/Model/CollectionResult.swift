@@ -1,7 +1,7 @@
 import Foundation
 
 public struct CollectionResult: Decodable {
-  let movies: [Movie]?
+  let movies: [MovieOverview]?
 
   enum CodingKeys: String, CodingKey {
     case movies = "parts"

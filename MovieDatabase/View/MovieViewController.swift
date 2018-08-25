@@ -20,7 +20,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UIColle
   var movieClient: MovieClient!
   var imageClient: ImageClient!
   var cast: [Actor] = []
-  var collectionMovies: [Movie] = []
+  var collectionMovies: [MovieOverview] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()

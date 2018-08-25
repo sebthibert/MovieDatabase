@@ -4,7 +4,7 @@ class NowPlayingViewController: UIViewController, UICollectionViewDelegate, UICo
   @IBOutlet weak var collectionView: UICollectionView!
   let movieClient = MovieClient()
   let imageClient = ImageClient()
-  var movies: [Movie] = []
+  var movies: [MovieOverview] = []
   var movieSelectedIndex = IndexPath(item: 0, section: 0)
   var columnCount: CGFloat = 2
 
