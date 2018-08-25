@@ -30,6 +30,7 @@
 		BCD1D3B02126BF06001E180D /* CreditsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD1D3AF2126BF06001E180D /* CreditsResult.swift */; };
 		BCD1D3B22126C29A001E180D /* ActorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD1D3B12126C29A001E180D /* ActorCollectionViewCell.swift */; };
 		BCD1D3B42126C973001E180D /* CollectionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD1D3B32126C973001E180D /* CollectionResult.swift */; };
+		BCE31DB521306DEB0065E7E4 /* MovieSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE31DB421306DEB0065E7E4 /* MovieSorter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		BCD1D3AF2126BF06001E180D /* CreditsResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsResult.swift; sourceTree = "<group>"; };
 		BCD1D3B12126C29A001E180D /* ActorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorCollectionViewCell.swift; sourceTree = "<group>"; };
 		BCD1D3B32126C973001E180D /* CollectionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionResult.swift; sourceTree = "<group>"; };
+		BCE31DB421306DEB0065E7E4 /* MovieSorter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSorter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,7 @@
 			children = (
 				BCCA0583211DA06100CF9B19 /* MovieFeedResult.swift */,
 				BC177B3B211DC90A00F952EB /* MovieDetailsResult.swift */,
+				BCE31DB421306DEB0065E7E4 /* MovieSorter.swift */,
 				BC177B41211DE5C200F952EB /* TailerResult.swift */,
 				BCD1D3AF2126BF06001E180D /* CreditsResult.swift */,
 				BCD1D3B32126C973001E180D /* CollectionResult.swift */,
@@ -353,6 +356,7 @@
 				BCD1D3B42126C973001E180D /* CollectionResult.swift in Sources */,
 				BCCA057D211D983900CF9B19 /* APIClient.swift in Sources */,
 				BC016FBA212B321500A53379 /* ExpandAnimationController.swift in Sources */,
+				BCE31DB521306DEB0065E7E4 /* MovieSorter.swift in Sources */,
 				BC177B3C211DC90A00F952EB /* MovieDetailsResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
