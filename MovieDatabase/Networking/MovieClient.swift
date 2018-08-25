@@ -5,6 +5,7 @@ enum MovieFeed {
   case movie(Int?)
   case trailer(Int?)
   case credits(Int?)
+  case person(Int?)
   case collection(Int?)
 }
 
@@ -19,6 +20,7 @@ extension MovieFeed: Endpoint {
     case .movie(let id): return "/3/movie/\(id ?? 0)"
     case .trailer(let id): return "/3/movie/\(id ?? 0)/videos"
     case .credits(let id): return "/3/movie/\(id ?? 0)/credits"
+    case .person(let id): return "/3/person/\(id ?? 0)"
     case .collection(let id): return "/3/collection/\(id ?? 0)"
     }
   }
