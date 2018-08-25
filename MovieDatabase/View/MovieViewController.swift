@@ -1,7 +1,7 @@
 import UIKit
 import WebKit
 
-class MovieViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class MovieViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
   @IBOutlet weak var fullTitle: UILabel!
   @IBOutlet weak var date: UILabel!
   @IBOutlet weak var score: UILabel!
@@ -19,7 +19,7 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UIColle
   var movie: MovieDetailsResult!
   var movieClient: MovieClient!
   var imageClient: ImageClient!
-  var cast: [Actor] = []
+  var cast: [ActorOverview] = []
   var collectionMovies: [MovieOverview] = []
 
   override func viewDidLoad() {
@@ -71,6 +71,35 @@ class MovieViewController: UIViewController, UICollectionViewDataSource, UIColle
       let collectionExcludingCurrentMovie = movies.filter { $0.id != self?.movie.id }
       self?.collectionMovies = collectionExcludingCurrentMovie
       self?.collectionCollectionView.reloadData()
+    }
+  }
+
+  // MARK: UICollectionViewDelegate
+
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    collectionView == castCollectionView ? didSelectActorCellAt(indexPath) : didSelectMovieCellAt(indexPath)
+  }
+
+  func didSelectMovieCellAt(_ indexPath: IndexPath) {
+
+  }
+
+  func didSelectActorCellAt(_ indexPath: IndexPath) {
+    let actor = cast[indexPath.row]
+    let alert = UIAlertController(title: "Visit \(actor.name ?? "") on IMDb", message: nil, preferredStyle: .actionSheet)
+    alert.addAction(UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
+      self?.openIMDb(forActor: actor)
+    })
+    alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+    present(alert, animated: true)
+  }
+
+  func openIMDb(forActor actor: ActorOverview) {
+    movieClient.getActor(from: .person(actor.id)) { actor in
+      guard let url = URL(string: "https://www.imdb.com/name/\(actor.imdbId ?? "")") else {
+        return
+      }
+      UIApplication.shared.open(url)
     }
   }
 
