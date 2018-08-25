@@ -126,6 +126,30 @@ class MovieClient: APIClient {
   }
 
   func getCollectionMovies(for movieFeedType: MovieFeed, completion: @escaping ([Movie]) -> Void) {
+  func getActor(from movieFeedType: MovieFeed, completion: @escaping (ActorDetailsResult) -> Void) {
+    getActorDetailsResult(from: movieFeedType) { result in
+      switch result {
+      case .success(let actorResult):
+        guard let actorResult = actorResult else {
+          return
+        }
+        completion(actorResult)
+      case .failure(let error):
+        print(error)
+      }
+    }
+  }
+
+  func getActorDetailsResult(from movieFeedType: MovieFeed, completion: @escaping (Result<ActorDetailsResult?, APIError>) -> Void) {
+    let request = movieFeedType.request
+    fetch(with: request, decode: { json -> ActorDetailsResult? in
+      guard let actorDetails = json as? ActorDetailsResult else {
+        return nil
+      }
+      return actorDetails
+    }, completion: completion)
+  }
+
     getCollectionResult(from: movieFeedType) { result in
       switch result {
       case .success(let collectionResult):
