@@ -1,6 +1,6 @@
 import UIKit
 
-class NowPlayingViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, FloatingActionManagerDelegate {
+class MovieFeedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, FloatingActionManagerDelegate {
   @IBOutlet weak var collectionView: UICollectionView!
   let movieClient = MovieClient()
   let imageClient = ImageClient()
@@ -15,11 +15,11 @@ class NowPlayingViewController: UIViewController, UICollectionViewDelegate, UICo
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    getMovies()
+    getMoviesFor(movieFeed: .nowPlaying)
   }
 
-  func getMovies() {
-    movieClient.getMovies(for: .nowPlaying) { [weak self] movies in
+  func getMoviesFor(movieFeed: MovieFeed) {
+    movieClient.getMovies(for: movieFeed) { [weak self] movies in
       self?.movies = movies
       self?.setupFloatingActions(withMovies: movies)
       self?.collectionView?.reloadData()
@@ -56,10 +56,6 @@ class NowPlayingViewController: UIViewController, UICollectionViewDelegate, UICo
     return cell
   }
 
-  func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-    return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "NowPlayingHeader", for: indexPath)
-  }
-
   // MARK: UICollectionViewDelegate
 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -86,9 +82,8 @@ class NowPlayingViewController: UIViewController, UICollectionViewDelegate, UICo
 
   // MARK: FloatingActionManagerDelegate
 
-  func updateColumnCount(to columnCount: CGFloat) {
-    self.columnCount = columnCount
-    collectionView.reloadData()
+  func updateMovieFeed(to movieFeed: MovieFeed, title: String) {
+    getMoviesFor(movieFeed: movieFeed)
   }
 
   func updateMovies(to sortedMovies: [MovieOverview]) {

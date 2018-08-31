@@ -12,21 +12,21 @@ class ExpandAnimationController: NSObject, UIViewControllerAnimatedTransitioning
   }
 
   func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-    guard let collectionViewController = transitionContext.viewController(forKey: .from) as? NowPlayingViewController else {
+    guard let movieFeedViewController = transitionContext.viewController(forKey: .from) as? MovieFeedViewController else {
       return
     }
-    guard let viewController = transitionContext.viewController(forKey: .to) as? MovieViewController else {
+    guard let movieViewController = transitionContext.viewController(forKey: .to) as? MovieViewController else {
       return
     }
-    guard let snapshot = collectionViewController.collectionView?.cellForItem(at: collectionViewController.movieSelectedIndex)?.snapshotView(afterScreenUpdates: true)  else {
+    guard let snapshot = movieFeedViewController.collectionView?.cellForItem(at: movieFeedViewController.movieSelectedIndex)?.snapshotView(afterScreenUpdates: true)  else {
       return
     }
     let containerView = transitionContext.containerView
     snapshot.frame = originFrame
     snapshot.layer.masksToBounds = true
-    containerView.addSubview(viewController.view)
+    containerView.addSubview(movieViewController.view)
     containerView.addSubview(snapshot)
-    viewController.view.alpha = 0
+    movieViewController.view.alpha = 0
     let duration = transitionDuration(using: transitionContext)
     UIView.animateKeyframes(
       withDuration: duration,
@@ -34,21 +34,21 @@ class ExpandAnimationController: NSObject, UIViewControllerAnimatedTransitioning
       options: .calculationModeCubic,
       animations: {
         UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 1/4) {
-          collectionViewController.view.alpha = 0
-          let width = collectionViewController.view.frame.width
+          movieFeedViewController.view.alpha = 0
+          let width = movieFeedViewController.view.frame.width
           snapshot.frame = CGRect(x: 0, y: 0, width: width, height: width * 1.5)
-          snapshot.center = collectionViewController.view.center
+          snapshot.center = movieFeedViewController.view.center
         }
         UIView.addKeyframe(withRelativeStartTime: 1/4, relativeDuration: 1/4) {
           snapshot.alpha = 0
         }
         UIView.addKeyframe(withRelativeStartTime: 1/2, relativeDuration: 1/2) {
-          viewController.view.alpha = 1
+          movieViewController.view.alpha = 1
         }
     },
       completion: { _ in
         snapshot.removeFromSuperview()
-        collectionViewController.view.alpha = 1
+        movieFeedViewController.view.alpha = 1
         transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
     })
   }

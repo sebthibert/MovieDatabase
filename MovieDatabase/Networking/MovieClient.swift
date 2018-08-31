@@ -2,6 +2,7 @@ import Foundation
 
 enum MovieFeed {
   case nowPlaying
+  case upcoming
   case movie(Int?)
   case trailer(Int?)
   case credits(Int?)
@@ -17,6 +18,7 @@ extension MovieFeed: Endpoint {
   var path: String {
     switch self {
     case .nowPlaying: return "/3/movie/now_playing"
+    case .upcoming: return "/3/movie/upcoming"
     case .movie(let id): return "/3/movie/\(id ?? 0)"
     case .trailer(let id): return "/3/movie/\(id ?? 0)/videos"
     case .credits(let id): return "/3/movie/\(id ?? 0)/credits"

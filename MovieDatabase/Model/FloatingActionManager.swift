@@ -1,7 +1,7 @@
 import UIKit
 
 protocol FloatingActionManagerDelegate: class {
-  func updateColumnCount(to columnCount: CGFloat)
+  func updateMovieFeed(to movieFeed: MovieFeed, title: String)
   func updateMovies(to sortedMovies: [MovieOverview])
 }
 
@@ -21,18 +21,18 @@ class FloatingActionManager {
 
   func setupDisplay() {
     let displayFloatingAction = FloatingActionView(alignment: .left)
-    displayFloatingAction.buttonText = "Display"
-    displayFloatingAction.addItem("Single", icon: #imageLiteral(resourceName: "single-display"), handler: displaySingleColumn)
-    displayFloatingAction.addItem("Double", icon: #imageLiteral(resourceName: "dual-display"), handler: displayDoubleColumn)
+    displayFloatingAction.buttonText = "View"
+    displayFloatingAction.addItem("Now playing", icon: #imageLiteral(resourceName: "clapperboard"), handler: getNowPlayingMovies)
+    displayFloatingAction.addItem("Upcoming", icon: #imageLiteral(resourceName: "calendar"), handler: getUpcomingMovies)
     floatingActions.append(displayFloatingAction)
   }
 
-  func displaySingleColumn() {
-    delegate?.updateColumnCount(to: 1)
+  func getNowPlayingMovies() {
+    delegate?.updateMovieFeed(to: .nowPlaying, title: "Now playing")
   }
 
-  func displayDoubleColumn() {
-    delegate?.updateColumnCount(to: 2)
+  func getUpcomingMovies() {
+    delegate?.updateMovieFeed(to: .upcoming, title: "Upcoming")
   }
 
   func setupSortBy() {
