@@ -5,7 +5,7 @@ struct MovieFeedResult: Decodable {
   let results: [MovieOverview]?
 }
 
-struct MovieOverview: Decodable {
+struct MovieOverview: Codable {
   let id: Int?
   let title: String?
   let posterPath: String?
